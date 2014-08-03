@@ -104,7 +104,7 @@ set showmode
 set grepprg=grep\ -nH\ $*
 nnoremap <silent> <F10> :Grep -r --exclude=doxygen*.* --include=*.c --include=*.h --include=*.cpp --include=*.hpp --include=*.xml --include=wscript --include=*.edc<CR>
 
-nnoremap <silent> <F8> :TlistToggle<CR>
+nmap <F8> :TagbarToggle<CR>
 
 " This offers intelligent C++ completion when typing ... .->. or <C-o>
 set tags+=~/.vim/tags/cpp
