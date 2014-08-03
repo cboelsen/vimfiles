@@ -22,6 +22,11 @@ set nocompatible
 
 set completeopt=menu,longest,preview
 
+set noswapfile
+
+set foldmethod=indent
+set foldlevel=99
+
 " configure tabwidth and insert spaces instead of tabs
 set expandtab
 set shiftwidth=4
@@ -77,7 +82,7 @@ nmap <F2> :wa<CR>
 " switch between header/source with F4
 map <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
-"When F4 is pressed, the list of current buffers appears,
+"When F6 is pressed, the list of current buffers appears,
 "then you are prompted with the list of open files to which you can choose the
 "number
 :nnoremap <F6> :buffers<CR>:buffer<Space>
@@ -108,8 +113,10 @@ set tags+=~/.vim/tags/tags
 map <F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 let mapleader=" "
-nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>d :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_autoclose_preview_window_after_completion=1
+
+nnoremap <leader>g :GundoToggle<CR>
 
 nmap <F5> :wa<CR> :!python %<CR>
 "autocmd Filetype python nnoremap <buffer> <F5> <C-o>:update<Bar>execute '!python '.shellescape(@%, 1)<CR>
@@ -135,13 +142,9 @@ set wrapscan
 "set spell
 " turn line numbers on
 set number
-" Show numbers relative to the cursor
-"set relativenumber
 " highlight matching braces
 set showmatch
 let loaded_matchparen = 1
-" Highlight lines wider than 80 characters
-"set textwidth=79
 " Set to auto read when a file is changed from the outside
 set autoread
 " Highlight doxygen syntax
