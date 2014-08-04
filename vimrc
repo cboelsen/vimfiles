@@ -94,7 +94,14 @@ set laststatus=2
 " TODO Re-enable when fonts loaded!
 "let g:airline_powerline_fonts=1
 
+" Sytastic Settings
 let g:flake8_max_line_length=119
+let g:syntastic_python_flake8_args = "--max-line-length=119"
+let g:syntastic_warning_symbol="⚠"
+let g:syntastic_error_symbol="✗"
+let g:syntastic_enable_signs=1
+let g:syntastic_check_on_open=1
+let g:syntastic_python_checkers = ["flake8"]
 
 nnoremap <F3> :set invpaste paste?<CR>
 set pastetoggle=<F3>
