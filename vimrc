@@ -114,10 +114,8 @@ nnoremap <silent> <F10> :Grep -r --exclude=doxygen*.* --include=*.c --include=*.
 nmap <F8> :TagbarToggle<CR>
 
 " This offers intelligent C++ completion when typing ... .->. or <C-o>
-set tags+=~/.vim/tags/cpp
-set tags+=~/.vim/tags/tags
-" map <F12> :!ctags -R -f ~/.vim/tags/tags --c++-kinds=+p --fields=+iaS --extra=+q --exclude=ggl --exclude=boost ./ *<CR>
-map <F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+set tags+=~/.vim/tagstore/tags
+map <F12> :!ctags -f ~/.vim/tagstore/tags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 let mapleader=" "
 nnoremap <leader>d :YcmCompleter GoToDefinitionElseDeclaration<CR>
