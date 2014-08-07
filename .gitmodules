@@ -43,3 +43,6 @@
 [submodule "bundle/Colorizer"]
 	path = bundle/Colorizer
 	url = https://github.com/chrisbra/Colorizer
+[submodule "bundle/vim-qml"]
+	path = bundle/vim-qml
+	url = https://github.com/peterhoeg/vim-qml
