@@ -105,6 +105,9 @@ let g:syntastic_python_checkers = ["flake8"]
 
 let g:colorizer_auto_filetype='css,html'
 
+let g:signify_vcs_list = ['git', 'hg']
+let g:signify_update_on_bufenter = 0
+
 nnoremap <F3> :set invpaste paste?<CR>
 set pastetoggle=<F3>
 set showmode
