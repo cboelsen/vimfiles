@@ -124,7 +124,6 @@ let g:ycm_autoclose_preview_window_after_completion=1
 nnoremap <leader>g :GundoToggle<CR>
 
 nmap <F5> :wa<CR> :!python %<CR>
-"autocmd Filetype python nnoremap <buffer> <F5> <C-o>:update<Bar>execute '!python '.shellescape(@%, 1)<CR>
 
 
 function! Build()
@@ -157,17 +156,6 @@ let g:load_doxygen_syntax=1
 
 " Set the cursor to be centered - when moving vertical..
 set so=10
-" Set cursor colours:
-if &term =~ "xterm\\|rxvt\\|screen"
-  " use an orange cursor in insert mode
-  let &t_SI = "\<Esc>]12;red\x7"
-  " use a red cursor otherwise
-  let &t_EI = "\<Esc>]12;green\x7"
-  silent !echo -ne "\033]12;green\007"
-  " reset cursor when vim exits
-  autocmd VimLeave * silent !echo -ne "\033]12;yellow\007"
-  " use \003]12;gray\007 for gnome-terminal
-endif
 
 set ruler
 set background=dark
@@ -234,8 +222,15 @@ au BufWinEnter * let w:m2=matchadd('FarTooLong', '\%<122v.\%>120v', -1)
 " Ensure the slowdown for buffer matches is prolonged
 au Filetype cpp,c,java au BufWinLeave call clearmatches()
 
-" Ensure the syntax is updated on loading.
-autocmd BufEnter * :syntax sync fromstart
+augroup vimrc_autocmd
+    autocmd!
+
+    " Jump to the last position when reopening a file
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+    " Ensure the syntax is updated on loading.
+    autocmd BufEnter * :syntax sync fromstart
+augroup END
 
 " Enable highlighting of GLSL files:
 au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl setf glsl
