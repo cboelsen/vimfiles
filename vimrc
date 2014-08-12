@@ -168,6 +168,13 @@ set background=dark
 " intelligent comments
 set comments=sl:/*,mb:\ *,elx:\ */
 
+" Syntax coloring lines that are too long just slows down the world
+set synmaxcol=128
+
+set ttyfast " u got a fast terminal
+set ttyscroll=3
+set lazyredraw " to avoid scrolling problems
+
 " Creates a session
 function! MakeSession()
   let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
