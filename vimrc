@@ -169,7 +169,7 @@ set background=dark
 set comments=sl:/*,mb:\ *,elx:\ */
 
 " Syntax coloring lines that are too long just slows down the world
-set synmaxcol=128
+set synmaxcol=250
 
 set ttyfast " u got a fast terminal
 set ttyscroll=3
@@ -225,12 +225,6 @@ set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_co
 set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
 
-" Set the colour scheme for lines that exceed text width
-highlight TooLong ctermbg=20
-au BufWinEnter * let w:m2=matchadd('TooLong', '\%<82v.\%>80v', -1)
-highlight FarTooLong ctermbg=52
-au BufWinEnter * let w:m2=matchadd('FarTooLong', '\%<122v.\%>120v', -1)
-
 " Ensure the slowdown for buffer matches is prolonged
 au Filetype cpp,c,java au BufWinLeave call clearmatches()
 
@@ -242,6 +236,12 @@ augroup vimrc_autocmd
 
     " Ensure the syntax is updated on loading.
     autocmd BufEnter * :syntax sync fromstart
+
+    "" Set the colour scheme for lines that exceed text width
+    "highlight TooLong ctermbg=20
+    "au BufWinEnter * let w:m2=matchadd('TooLong', '\%<82v.\%>80v', -1)
+    "highlight FarTooLong ctermbg=52
+    "au BufWinEnter * let w:m2=matchadd('FarTooLong', '\%<122v.\%>120v', -1)
 augroup END
 
 " Enable highlighting of GLSL files:
