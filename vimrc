@@ -238,10 +238,10 @@ augroup vimrc_autocmd
     autocmd BufEnter * :syntax sync fromstart
 
     "" Set the colour scheme for lines that exceed text width
-    "highlight TooLong ctermbg=20
-    "au BufWinEnter * let w:m2=matchadd('TooLong', '\%<82v.\%>80v', -1)
-    "highlight FarTooLong ctermbg=52
-    "au BufWinEnter * let w:m2=matchadd('FarTooLong', '\%<122v.\%>120v', -1)
+    autocmd BufEnter * highlight TooLong ctermbg=18
+    autocmd BufEnter * match TooLong '\%81v.'
+    autocmd BufEnter * highlight FarTooLong ctermbg=52
+    autocmd BufEnter * 2match FarTooLong '\%121v.'
 augroup END
 
 " Enable highlighting of GLSL files:
