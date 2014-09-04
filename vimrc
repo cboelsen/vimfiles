@@ -125,6 +125,7 @@ map <F12> :!ctags -f ~/.vim/tagstore/tags -R --sort=yes --c++-kinds=+p --fields=
 let mapleader=" "
 nnoremap <leader>d :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_collect_identifiers_from_tags_files=1
 
 nnoremap <leader>g :GundoToggle<CR>
 
