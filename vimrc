@@ -1,13 +1,40 @@
-filetype plugin on
-filetype indent on
+" Vundle setup
+
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'chrisbra/Colorizer'
+Plugin 'scrooloose/syntastic'
+Plugin 'bling/vim-airline'
+Plugin 'tikhomirov/vim-glsl'
+Plugin 'peterhoeg/vim-qml'
+Plugin 'jmcantrell/vim-virtualenv'
+Plugin 'vim-scripts/edc-support'
+Plugin 'majutsushi/tagbar'
+Plugin 'nvie/vim-flake8'
+Plugin 'mhinz/vim-signify'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-scripts/grep.vim'
+
+" ctrlp.vim    grep    gundo.vim
+
+call vundle#end()
+
+" Finished setting up Vundle
+
+filetype plugin indent on
 
 " turn syntax highlighting on
 set t_Co=256
 syntax on
 colorscheme ir_black
-
-" Pathogen
-call pathogen#infect()
 
 " set UTF-8 encoding
 set enc=utf-8
@@ -16,9 +43,6 @@ set termencoding=utf-8
 
 " Keep undo history between buffer switches
 set hidden
-
-" disable vi compatibility (emulation of old bugs)
-set nocompatible
 
 set completeopt=menu,longest,preview
 
@@ -91,22 +115,30 @@ map <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 map <F11> <C-]>
 
 set laststatus=2
-" TODO Re-enable when fonts loaded!
-"let g:airline_powerline_fonts=1
 
 " Sytastic Settings
-let g:flake8_max_line_length=119
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
 let g:syntastic_python_flake8_args = "--max-line-length=119"
 let g:syntastic_warning_symbol="⚠"
 let g:syntastic_error_symbol="✗"
 let g:syntastic_enable_signs=1
-let g:syntastic_check_on_open=1
 let g:syntastic_python_checkers = ["flake8"]
+let g:syntastic_javascript_checkers = ['eslint']
 
 let g:colorizer_auto_filetype='css,html'
 
 let g:signify_vcs_list = ['git', 'hg']
 let g:signify_update_on_bufenter = 0
+
+let g:jsx_ext_required = 0  " Allow JSX in normal JS files
 
 nnoremap <F3> :set invpaste paste?<CR>
 set pastetoggle=<F3>
@@ -114,7 +146,12 @@ set showmode
 
 " map the Grep command to F10
 set grepprg=grep\ -nH\ $*
-nnoremap <silent> <F10> :Grep -r --exclude=doxygen*.* --include=*.c --include=*.h --include=*.cpp --include=*.hpp --include=*.xml --include=wscript --include=*.edc<CR>
+nnoremap <silent> <F10> :Grep -r --exclude=doxygen*.* --exclude-dir=node_modules
+            \ --include=*.c --include=*.h --include=*.cpp --include=*.hpp --include=wscript
+            \ --include=*.js --include=*.jsx
+            \ --include=*.py
+            \ --include=*.edc
+            \ <CR>
 
 nmap <F8> :TagbarToggle<CR>
 
@@ -126,6 +163,7 @@ let mapleader=" "
 nnoremap <leader>d :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_collect_identifiers_from_tags_files=1
+let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
 
 nnoremap <leader>g :GundoToggle<CR>
 
@@ -141,6 +179,8 @@ nmap <F9> :call Build()<CR>
 "setlocal spelllang=en_gb
 "map <F7> :setlocal spell! spell?<CR>
 "imap <F7> <C-o>:setlocal spell! spell?<CR>
+map <F7> :SyntasticCheck<CR>
+
 
 set nowrap
 
@@ -247,3 +287,4 @@ augroup END
 
 " Enable highlighting of GLSL files:
 au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl setf glsl
+au BufNewFile,BufRead wscript setf python
