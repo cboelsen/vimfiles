@@ -9,19 +9,76 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'chrisbra/Colorizer'
-Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
 Plugin 'tikhomirov/vim-glsl'
 Plugin 'peterhoeg/vim-qml'
 Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'vim-scripts/edc-support'
 Plugin 'majutsushi/tagbar'
-Plugin 'nvie/vim-flake8'
 Plugin 'mhinz/vim-signify'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/grep.vim'
+Plugin 'rust-lang/rust.vim'
+
+if version < 800
+    Plugin 'nvie/vim-flake8'
+    Plugin 'scrooloose/syntastic'
+
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 0
+    let g:syntastic_check_on_wq = 0
+
+    let g:syntastic_python_flake8_args = "--max-line-length=119"
+    let g:syntastic_warning_symbol="⚠"
+    let g:syntastic_error_symbol="✗"
+    let g:syntastic_enable_signs=1
+    let g:syntastic_python_checkers = ["flake8"]
+    let g:syntastic_javascript_checkers = ['eslint']
+
+    nmap <F5> :wa<CR> :!python %<CR>
+else
+    Plugin 'w0rp/ale'
+
+    nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+    nmap <silent> <C-j> <Plug>(ale_next_wrap)
+    " Write this in your vimrc file
+    let g:ale_lint_on_save = 1
+    let g:ale_lint_on_text_changed = 0
+    " You can disable this option too
+    " if you don't want linters to run on opening a file
+    let g:ale_lint_on_enter = 1
+
+    let g:ale_python_flake8_args = "--max-line-length=119"
+
+    Plugin 'skywind3000/asyncrun.vim'
+
+    " Quick run via <F5>
+    nnoremap <F5> :call <SID>compile_and_run()<CR>
+
+    augroup SPACEVIM_ASYNCRUN
+        autocmd!
+        " Automatically open the quickfix window
+        autocmd User AsyncRunStart call asyncrun#quickfix_toggle(15, 1)
+    augroup END
+
+    function! s:compile_and_run()
+        exec 'w'
+        if &filetype == 'c'
+            exec "AsyncRun! gcc % -o %<; time ./%<"
+        elseif &filetype == 'cpp'
+           exec "AsyncRun! g++ -std=c++11 % -o %<; time ./%<"
+        elseif &filetype == 'java'
+           exec "AsyncRun! javac %; time java %<"
+        elseif &filetype == 'sh'
+           exec "AsyncRun! time bash %"
+        elseif &filetype == 'python'
+           exec "AsyncRun! time python %"
+        endif
+    endfunction
+endif
 
 " ctrlp.vim    grep    gundo.vim
 
@@ -121,17 +178,9 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_python_flake8_args = "--max-line-length=119"
-let g:syntastic_warning_symbol="⚠"
-let g:syntastic_error_symbol="✗"
-let g:syntastic_enable_signs=1
-let g:syntastic_python_checkers = ["flake8"]
-let g:syntastic_javascript_checkers = ['eslint']
+if version >= 800
+    set statusline+=%{ALEGetStatusLine()}
+endif
 
 let g:colorizer_auto_filetype='css,html'
 
@@ -167,22 +216,21 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
 
 nnoremap <leader>g :GundoToggle<CR>
 
-nmap <F5> :wa<CR> :!python %<CR>
-
+setlocal spell
+setlocal spelllang=en_gb
+map <F7> :setlocal spell! spell?<CR>
+imap <F7> <C-o>:setlocal spell! spell?<CR>
 
 function! Build()
     !python setup.py sdist && pip install --upgrade --no-deps .
 endfunction
 nmap <F9> :call Build()<CR>
 
-"setlocal spell
-"setlocal spelllang=en_gb
-"map <F7> :setlocal spell! spell?<CR>
-"imap <F7> <C-o>:setlocal spell! spell?<CR>
-map <F7> :SyntasticCheck<CR>
-
-
-set nowrap
+set wrap
+set linebreak
+set nolist  " list disables linebreak
+set textwidth=0
+set wrapmargin=0
 
 set backspace=2
 " Place the backup files in a single directory - kepp it neat!
