@@ -39,6 +39,10 @@ if version < 800
     let g:syntastic_javascript_checkers = ['eslint']
 
     nmap <F5> :wa<CR> :!python %<CR>
+
+    function! PipInstall()
+        !pip install --upgrade --no-deps .
+    endfunction
 else
     Plugin 'w0rp/ale'
 
@@ -78,11 +82,19 @@ else
            exec "AsyncRun! time python %"
         endif
     endfunction
+
+    function! PipInstall()
+        AsyncRun pip install --upgrade --no-deps .
+    endfunction
+
+    noremap <F9> :call asyncrun#quickfix_toggle(8)<cr>
 endif
 
 " ctrlp.vim    grep    gundo.vim
 
 call vundle#end()
+
+command Pip execute ":call PipInstall()"
 
 " Finished setting up Vundle
 
@@ -220,11 +232,6 @@ setlocal spell
 setlocal spelllang=en_gb
 map <F7> :setlocal spell! spell?<CR>
 imap <F7> <C-o>:setlocal spell! spell?<CR>
-
-function! Build()
-    !python setup.py sdist && pip install --upgrade --no-deps .
-endfunction
-nmap <F9> :call Build()<CR>
 
 set wrap
 set linebreak
