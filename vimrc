@@ -228,7 +228,6 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
 
 nnoremap <leader>g :GundoToggle<CR>
 
-setlocal spell
 setlocal spelllang=en_gb
 map <F7> :setlocal spell! spell?<CR>
 imap <F7> <C-o>:setlocal spell! spell?<CR>
