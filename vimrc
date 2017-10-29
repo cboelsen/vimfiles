@@ -21,23 +21,7 @@ Plugin 'mxw/vim-jsx'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/grep.vim'
 Plugin 'rust-lang/rust.vim'
-
-function! s:compile_and_run(calltype)
-    exec 'w'
-    if &filetype == 'c'
-        exec a:calltype . "! gcc % -o %<; time ./%<"
-    elseif &filetype == 'cpp'
-        exec a:calltype . "! g++ -std=c++11 % -o %<; time ./%<"
-    elseif &filetype == 'java'
-        exec a:calltype . "! javac %; time java %<"
-    elseif &filetype == 'sh'
-        exec a:calltype . "! time bash %"
-    elseif &filetype == 'python'
-        exec a:calltype . "! time python %"
-    elseif &filetype == 'go'
-        exec a:calltype . "! time go build && go test ./..."
-    endif
-endfunction
+Plugin 'vim-scripts/TaskList.vim'
 
 if version < 800
     Plugin 'nvie/vim-flake8'
@@ -54,8 +38,6 @@ if version < 800
     let g:syntastic_enable_signs=1
     let g:syntastic_python_checkers = ["flake8"]
     let g:syntastic_javascript_checkers = ['eslint']
-
-    nnoremap <F5> :call <SID>compile_and_run("")<CR>
 
     function! PipInstall()
         !pip install --upgrade --no-deps .
@@ -74,10 +56,29 @@ else
 
     let g:ale_python_flake8_args = "--max-line-length=119"
 
+    Plugin 'fatih/vim-go'
+
     Plugin 'skywind3000/asyncrun.vim'
 
+    function! s:compile_and_run()
+        exec 'w'
+        if &filetype == 'c'
+            exec "AsyncRun! gcc % -o %<; time ./%<"
+        elseif &filetype == 'cpp'
+            exec "AsyncRun! g++ -std=c++11 % -o %<; time ./%<"
+        elseif &filetype == 'java'
+            exec "AsyncRun! javac %; time java %<"
+        elseif &filetype == 'sh'
+            exec "AsyncRun! time bash %"
+        elseif &filetype == 'python'
+            exec "AsyncRun! time python %"
+        elseif &filetype == 'go'
+            exec "AsyncRun! time go build && go test -cover ./..."
+        endif
+    endfunction
+
     " Quick run via <F5>
-    nnoremap <F5> :call <SID>compile_and_run("AsyncRun")<CR>
+    nnoremap <F5> :call <SID>compile_and_run()<CR>
 
     augroup SPACEVIM_ASYNCRUN
         autocmd!
