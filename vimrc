@@ -22,6 +22,8 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/grep.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'vim-scripts/TaskList.vim'
+Plugin 'lervag/vimtex'
+Plugin 'editorconfig/editorconfig-vim'
 
 if version < 800
     Plugin 'nvie/vim-flake8'
@@ -203,6 +205,8 @@ let g:signify_vcs_list = ['git', 'hg']
 let g:signify_update_on_bufenter = 0
 
 let g:jsx_ext_required = 0  " Allow JSX in normal JS files
+
+let g:vimtex_view_general_viewer = "lesspipe.sh"
 
 nnoremap <F3> :set invpaste paste?<CR>
 set pastetoggle=<F3>
