@@ -56,25 +56,11 @@ flags = [
     '-x', 'c++',
 
     # c/c++ include path
-    '-isystem', '/usr/include/c++/4.8',
-    '-isystem', '/usr/include/c++/4.8.5',
-    '-isystem', '/usr/include/c++/4.9.3',
-    '-isystem', '/usr/include/c++/5',
-    '-isystem', '/usr/include/c++/6',
-    '-isystem', '/usr/include/c++/7',
-    '-isystem', '/usr/include/c++/8',
     '-isystem', '/usr/include',
     '-isystem', '/usr/include/x86_64-linux-gnu',
     '-isystem', '/usr/local/include',
 
-    #'-isystem', '../BoostParts',
-    # This path will only work on OS X, but extra paths that don't exist are not
-    # harmful
-    #'-isystem', '/System/Library/Frameworks/Python.framework/Headers',
-    #'-isystem', '../llvm/include',
-    #'-isystem', '../llvm/tools/clang/include',
     #'-I', '.',
-    #'-I', './ClangCompleter',
     #'-isystem', './tests/gmock/gtest',
     #'-isystem', './tests/gmock/gtest/include',
     #'-isystem', './tests/gmock',
@@ -127,10 +113,20 @@ def GetCompilationInfoForFile(filename):
     return database.GetCompilationInfoForFile(filename)
 
 
+def CppIncludeDirs(rootdir):
+    for filename in sorted(os.listdir(rootdir), reverse=True):
+        filepath = os.path.join(rootdir, filename)
+        if os.path.isdir(filepath):
+            yield filepath
+
+
 def FlagsForFile(filename, **kwargs):
     if not database:
+        compiler_flags = flags[:]
+        for cpp_include_dir in CppIncludeDirs('/usr/include/c++'):
+            compiler_flags += ['-isystem', cpp_include_dir]
         return {
-            'flags': flags,
+            'flags': compiler_flags,
             'include_paths_relative_to_dir': DirectoryOfThisScript()
         }
 
