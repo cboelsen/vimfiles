@@ -71,11 +71,11 @@ else
         elseif &filetype == 'java'
             exec "AsyncRun! javac %; time java %<"
         elseif &filetype == 'sh'
-            exec "AsyncRun! time bash %"
+            exec "AsyncRun! bash %"
         elseif &filetype == 'python'
-            exec "AsyncRun! time python %"
+            exec "AsyncRun! python %"
         elseif &filetype == 'go'
-            exec "AsyncRun! time go build && go test -cover ./..."
+            exec "AsyncRun! go build && go test -cover ./..."
         endif
     endfunction
 
