@@ -24,6 +24,7 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'vim-scripts/TaskList.vim'
 Plugin 'lervag/vimtex'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'rhysd/vim-clang-format'
 
 if version < 800
     Plugin 'nvie/vim-flake8'
@@ -189,6 +190,14 @@ map <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 map <F11> <C-]>
 
 set laststatus=2
+
+" clang format
+let g:clang_format#code_style = 'chromium'
+" map to <Leader>cf in C++ code
+autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+" " if you install vim-operator-user
+autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
 
 " Sytastic Settings
 set statusline+=%#warningmsg#
