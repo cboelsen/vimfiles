@@ -59,6 +59,9 @@ else
 
     let g:ale_python_flake8_args = "--max-line-length=119"
 
+    let g:ale_cpp_clangtidy_checks = ['*', '-fuchsia-default-arguments']
+    let g:ale_cpp_clangtidy_options = '-extra-arg=-std=c++17'
+
     Plugin 'fatih/vim-go'
 
     Plugin 'skywind3000/asyncrun.vim'
