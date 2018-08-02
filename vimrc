@@ -327,8 +327,7 @@ au VimEnter * nested :call LoadSession()
 au VimLeave * :call UpdateSession()
 
 " ------------------------------ TaskList ----------------------------------
-"map <leader>t <Plug>TaskList
-map T :TaskList<CR>
+map <leader>t <Plug>TaskList
 let g:tlTokenList = ['TODO', '@todo']
 
 " ------------------------------ Python   ----------------------------------
