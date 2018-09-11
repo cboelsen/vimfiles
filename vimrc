@@ -253,7 +253,6 @@ imap <F7> <C-o>:setlocal spell! spell?<CR>
 
 set wrap
 set linebreak
-set nolist  " list disables linebreak
 set textwidth=0
 set wrapmargin=0
 
@@ -336,7 +335,7 @@ set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
 
 " Ensure the slowdown for buffer matches is prolonged
-au Filetype cpp,c,java au BufWinLeave call clearmatches()
+autocmd BufWinLeave * call clearmatches()
 
 augroup vimrc_autocmd
     autocmd!
@@ -357,3 +356,7 @@ augroup END
 " Enable highlighting of GLSL files:
 au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl setf glsl
 au BufNewFile,BufRead wscript setf python
+
+" Show tabs and trailing whitespace as bright orange special characters.
+set list listchars=tab:▸·,trail:•
+hi SpecialKey ctermfg=214 guifg=#FFA500
