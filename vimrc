@@ -25,87 +25,65 @@ Plugin 'vim-scripts/TaskList.vim'
 Plugin 'lervag/vimtex'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'rhysd/vim-clang-format'
-
-if version < 800
-    Plugin 'nvie/vim-flake8'
-    Plugin 'scrooloose/syntastic'
-
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 0
-    let g:syntastic_check_on_wq = 0
-
-    let g:syntastic_python_flake8_args = "--max-line-length=119"
-    let g:syntastic_warning_symbol="⚠"
-    let g:syntastic_error_symbol="✗"
-    let g:syntastic_enable_signs=1
-    let g:syntastic_python_checkers = ["flake8"]
-    let g:syntastic_javascript_checkers = ['eslint']
-
-    function! PipInstall()
-        !pip install --upgrade --no-deps .
-    endfunction
-else
-    Plugin 'w0rp/ale'
-
-    nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-    nmap <silent> <C-j> <Plug>(ale_next_wrap)
-    " Write this in your vimrc file
-    let g:ale_lint_on_save = 1
-    let g:ale_lint_on_text_changed = 0
-    " You can disable this option too
-    " if you don't want linters to run on opening a file
-    let g:ale_lint_on_enter = 1
-
-    let g:ale_python_flake8_args = "--max-line-length=119"
-
-    let g:ale_cpp_clangtidy_checks = ['*', '-fuchsia-default-arguments']
-    let g:ale_cpp_clangtidy_options = '-extra-arg=-std=c++17'
-
-    Plugin 'fatih/vim-go'
-
-    Plugin 'skywind3000/asyncrun.vim'
-
-    function! s:compile_and_run()
-        exec 'w'
-        if &filetype == 'c'
-            exec "AsyncRun! gcc % -o %<; time ./%<"
-        elseif &filetype == 'cpp'
-            exec "AsyncRun! g++ -std=c++11 % -o %<; time ./%<"
-        elseif &filetype == 'java'
-            exec "AsyncRun! javac %; time java %<"
-        elseif &filetype == 'sh'
-            exec "AsyncRun! bash %"
-        elseif &filetype == 'python'
-            exec "AsyncRun! python %"
-        elseif &filetype == 'go'
-            exec "AsyncRun! go build && go test -cover ./..."
-        endif
-    endfunction
-
-    " Quick run via <F5>
-    nnoremap <F5> :call <SID>compile_and_run()<CR>
-
-    augroup SPACEVIM_ASYNCRUN
-        autocmd!
-        " Automatically open the quickfix window
-        autocmd User AsyncRunStart call asyncrun#quickfix_toggle(15, 1)
-    augroup END
-
-    function! PipInstall()
-        AsyncRun pip install --upgrade --no-deps .
-    endfunction
-
-    noremap <F9> :call asyncrun#quickfix_toggle(8)<cr>
-endif
-
-" ctrlp.vim    grep    gundo.vim
+Plugin 'w0rp/ale'
+Plugin 'fatih/vim-go'
+Plugin 'skywind3000/asyncrun.vim'
 
 call vundle#end()
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                    Ale                                       "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" Write this in your vimrc file
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
+" You can disable this option too
+" if you don't want linters to run on opening a file
+let g:ale_lint_on_enter = 1
+
+let g:ale_python_flake8_args = "--max-line-length=119"
+
+let g:ale_cpp_clangtidy_checks = ['*', '-fuchsia-default-arguments']
+let g:ale_cpp_clangtidy_options = '-extra-arg=-std=c++17'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 Asyncrun                                     "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:compile_and_run()
+    exec 'w'
+    if &filetype == 'c'
+        exec "AsyncRun! gcc % -o %<; time ./%<"
+    elseif &filetype == 'cpp'
+        exec "AsyncRun! g++ -std=c++11 % -o %<; time ./%<"
+    elseif &filetype == 'java'
+        exec "AsyncRun! javac %; time java %<"
+    elseif &filetype == 'sh'
+        exec "AsyncRun! bash %"
+    elseif &filetype == 'python'
+        exec "AsyncRun! python %"
+    elseif &filetype == 'go'
+        exec "AsyncRun! go build && go test -cover ./..."
+    endif
+endfunction
+
+" Quick run via <F5>
+nnoremap <F5> :call <SID>compile_and_run()<CR>
+
+augroup SPACEVIM_ASYNCRUN
+    autocmd!
+    " Automatically open the quickfix window
+    autocmd User AsyncRunStart call asyncrun#quickfix_toggle(15, 1)
+augroup END
+
+function! PipInstall()
+    AsyncRun pip install --upgrade --no-deps .
+endfunction
 command Pip execute ":call PipInstall()"
 
-" Finished setting up Vundle
+noremap <F9> :call asyncrun#quickfix_toggle(8)<cr>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 filetype plugin indent on
 
@@ -159,6 +137,14 @@ map , :
 "maps ctrl+p to go to previous buffer
 :nnoremap <C-p> :w<CR> :bprevious<CR>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                SPLIT WINDOWS                                 "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Maps Ctrl-[h,j,k,l] to navigating between split windows
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 " Maps Alt-[h,j,k,l] to resizing a window split
 map <silent> <A-h> <C-w><
 map <silent> <A-j> <C-W>-
@@ -173,7 +159,12 @@ map <silent> <A-p> <C-w><S-w>
 " Maps Alt-c with close window
 map <silent> <A-c> :clo<CR>
 map <silent> <A-d> :BD<CR>
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Work with chromebooks that don't have an escape key
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
@@ -192,8 +183,6 @@ map <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 " goto definition with F11
 map <F11> <C-]>
 
-set laststatus=2
-
 " clang format
 let g:clang_format#code_style = 'chromium'
 " map to <Leader>cf in C++ code
@@ -202,14 +191,13 @@ autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
 " " if you install vim-operator-user
 autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
 
+"Always display the status line.
+set laststatus=2
 " Sytastic Settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
-if version >= 800
-    set statusline+=%{ALEGetStatusLine()}
-endif
+set statusline+=%{ALEGetStatusLine()}
 
 let g:colorizer_auto_filetype='css,html'
 
