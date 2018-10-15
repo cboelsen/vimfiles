@@ -28,6 +28,8 @@ Plugin 'rhysd/vim-clang-format'
 Plugin 'w0rp/ale'
 Plugin 'fatih/vim-go'
 Plugin 'skywind3000/asyncrun.vim'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 
 call vundle#end()
 
@@ -83,6 +85,12 @@ endfunction
 command Pip execute ":call PipInstall()"
 
 noremap <F9> :call asyncrun#quickfix_toggle(8)<cr>
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                    FZF                                       "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <C-f> :Files<Cr>
+nnoremap <C-g> :Rg<Cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 filetype plugin indent on
