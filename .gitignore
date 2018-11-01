@@ -1,4 +1,14 @@
-tags
+# Location for the plugins when using vundle.
+/bundle/
+
+# ctags artifact.
+/tags
+
+# Artifact of netrw.vim: Network oriented reading, writing, and browsing.
 .netrwhist
-bundle/
+
+# Location of saved sessions, when using MakeSession().
+/sessions/
+
+# Python2 will leave behind a pyc for the ycm_extra_conf.py.
 *.pyc

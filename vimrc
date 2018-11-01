@@ -89,6 +89,17 @@ noremap <F9> :call asyncrun#quickfix_toggle(8)<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                    FZF                                       "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Augmenting the Rg command to use the preview function
+" "{'options': '--delimiter : --nth 4..'}" tells fzf to not search file paths.
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%', '?'),
+  \   <bang>0)
+" Augmenting the Find command to use the preview function
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+" Map shortcut keys to the common functions
 nnoremap <C-f> :Files<Cr>
 nnoremap <C-g> :Rg<Cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
