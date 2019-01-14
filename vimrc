@@ -119,6 +119,9 @@ set termencoding=utf-8
 " Keep undo history between buffer switches
 set hidden
 
+" Show tab completion options in the bottom strip, allowing navigation.
+set wildmenu
+
 set completeopt=menu,longest,preview
 
 set noswapfile
