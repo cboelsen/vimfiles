@@ -14,7 +14,6 @@ Plugin 'tikhomirov/vim-glsl'
 Plugin 'peterhoeg/vim-qml'
 Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'vim-scripts/edc-support'
-Plugin 'majutsushi/tagbar'
 Plugin 'mhinz/vim-signify'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
@@ -242,8 +241,6 @@ nnoremap <silent> <F10> :Grep -r --exclude=doxygen*.* --exclude-dir=node_modules
             \ --include=*.py
             \ --include=*.edc
             \ <CR>
-
-nmap <F8> :TagbarToggle<CR>
 
 " This offers intelligent C++ completion when typing ... .->. or <C-o>
 set tags+=~/.vim/tagstore/tags
