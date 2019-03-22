@@ -137,6 +137,8 @@ let c_space_errors = 2
 
 " Search while typing.
 set incsearch
+" Highlight all search matches.
+set hlsearch
 
 "Change so paste commands match indent level
 map p ]p
