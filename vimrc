@@ -10,13 +10,10 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'chrisbra/Colorizer'
 Plugin 'bling/vim-airline'
-Plugin 'tikhomirov/vim-glsl'
-Plugin 'peterhoeg/vim-qml'
 Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'vim-scripts/edc-support'
 Plugin 'mhinz/vim-signify'
 Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/grep.vim'
 Plugin 'rust-lang/rust.vim'
@@ -29,6 +26,7 @@ Plugin 'fatih/vim-go'
 Plugin 'skywind3000/asyncrun.vim'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
+Plugin 'sheerun/vim-polyglot'
 
 call vundle#end()
 
@@ -333,6 +331,12 @@ endfunction
 
 au VimEnter * nested :call LoadSession()
 au VimLeave * :call UpdateSession()
+
+" Rename a file
+function! Rename(newname)
+  exe "sav " a:newname " | bd# | !rm #"
+endfunction
+map <leader>r :call Rename("")
 
 " ------------------------------ TaskList ----------------------------------
 map <leader>t <Plug>TaskList
