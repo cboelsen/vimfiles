@@ -1,5 +1,5 @@
-# Location for the plugins when using vundle.
-/bundle/
+# Location for the plugins when using vim-plug.
+/plugged/
 
 # ctags artifact.
 /tags
@@ -12,3 +12,6 @@
 
 # Python2 will leave behind a pyc for the ycm_extra_conf.py.
 *.pyc
+
+# Automatically downloade the latest vim-plug
+autoload/plug.vim

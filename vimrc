@@ -1,34 +1,36 @@
 " Vundle setup
 
 set nocompatible
-filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
-Plugin 'chrisbra/Colorizer'
-Plugin 'bling/vim-airline'
-Plugin 'jmcantrell/vim-virtualenv'
-Plugin 'vim-scripts/edc-support'
-Plugin 'mhinz/vim-signify'
-Plugin 'pangloss/vim-javascript'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-scripts/grep.vim'
-Plugin 'rust-lang/rust.vim'
-Plugin 'vim-scripts/TaskList.vim'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'rhysd/vim-clang-format'
-Plugin 'w0rp/ale'
-Plugin 'fatih/vim-go'
-Plugin 'skywind3000/asyncrun.vim'
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'lervag/vimtex'
+Plug 'chrisbra/Colorizer'
+Plug 'bling/vim-airline'
+Plug 'jmcantrell/vim-virtualenv'
+Plug 'vim-scripts/edc-support'
+Plug 'mhinz/vim-signify'
+Plug 'pangloss/vim-javascript'
+Plug 'vim-scripts/grep.vim'
+Plug 'rust-lang/rust.vim'
+Plug 'vim-scripts/TaskList.vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'rhysd/vim-clang-format'
+Plug 'w0rp/ale'
+Plug 'fatih/vim-go'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'junegunn/fzf', { 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'lervag/vimtex'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --rust-completer --ts-completer --ninja' }
 
-call vundle#end()
+call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Security                                    "
@@ -112,11 +114,8 @@ nnoremap <C-f> :Files<Cr>
 nnoremap <C-g> :Rg<Cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-filetype plugin indent on
-
 " turn syntax highlighting on
 set t_Co=256
-syntax on
 colorscheme ir_black
 
 " set UTF-8 encoding
