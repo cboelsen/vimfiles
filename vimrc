@@ -26,6 +26,7 @@ Plugin 'skywind3000/asyncrun.vim'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'sheerun/vim-polyglot'
+Plugin 'lervag/vimtex'
 
 call vundle#end()
 
@@ -34,6 +35,11 @@ call vundle#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Workaround for CVE-2019-12735
 set nomodeline
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Polyglot                                    "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:polyglot_disabled = ['latex']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                    Ale                                       "
