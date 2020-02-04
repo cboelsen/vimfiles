@@ -61,6 +61,16 @@ let g:ale_cpp_clangtidy_checks = ['*', '-fuchsia-default-arguments']
 let g:ale_cpp_clangtidy_options = '-extra-arg=-std=c++17'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Airline                                     "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Show the buffers on top.
+let g:airline#extensions#tabline#enabled = 1
+" Use the powerline fonts for the > sections, etc.
+let g:airline_powerline_fonts = 1
+" Cache the highlighting groups, which shouldn't change much
+let g:airline_highlighting_cache = 1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Asyncrun                                     "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! s:compile_and_run()
