@@ -1,5 +1,3 @@
-" Vundle setup
-
 set nocompatible
 
 if empty(glob('~/.vim/autoload/plug.vim'))
