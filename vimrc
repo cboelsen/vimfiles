@@ -388,6 +388,10 @@ augroup END
 au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl setf glsl
 au BufNewFile,BufRead wscript setf python
 
+" Set the split panes to equal height/width on resize, to deal with different
+" sized terminals.
+au VimResized * wincmd =
+
 " Show tabs and trailing whitespace as bright orange special characters.
 set list listchars=tab:▸·,trail:•
 hi SpecialKey ctermfg=214 guifg=#FFA500
