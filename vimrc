@@ -382,6 +382,10 @@ augroup vimrc_autocmd
     autocmd BufEnter * match TooLong '\%81v.'
     autocmd BufEnter * highlight FarTooLong ctermbg=52
     autocmd BufEnter * 2match FarTooLong '\%121v.'
+
+    " Highlight non-ascii characters
+    autocmd BufEnter * highlight NonAscii ctermfg=Red guifg=Red
+    autocmd BufEnter * match NonAscii '[^\x00-\x7F]'
 augroup END
 
 " Enable highlighting of GLSL files:
