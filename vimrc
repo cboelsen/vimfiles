@@ -6,6 +6,11 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Polyglot                                    "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:polyglot_disabled = ['latex']
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'chrisbra/Colorizer'
@@ -35,11 +40,6 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Workaround for CVE-2019-12735
 set nomodeline
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                  Polyglot                                    "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:polyglot_disabled = ['latex']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                    Ale                                       "
@@ -246,6 +246,8 @@ let g:signify_update_on_bufenter = 0
 let g:jsx_ext_required = 0  " Allow JSX in normal JS files
 
 let g:vimtex_view_general_viewer = "lesspipe.sh"
+" Let vim know the flavour of tex we want to use, so that vimtex is loaded.
+let g:tex_flavor = 'latex'
 
 nnoremap <F3> :set invpaste paste?<CR>
 set pastetoggle=<F3>
