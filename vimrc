@@ -53,7 +53,7 @@ let g:ale_lint_on_text_changed = 0
 " if you don't want linters to run on opening a file
 let g:ale_lint_on_enter = 1
 
-let g:ale_python_flake8_args = "--max-line-length=119"
+let g:ale_python_flake8_options = "--max-line-length=119"
 
 let g:ale_cpp_clangtidy_checks = ['*', '-fuchsia-default-arguments']
 let g:ale_cpp_clangtidy_options = '-extra-arg=-std=c++17'
