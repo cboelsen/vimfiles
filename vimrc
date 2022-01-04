@@ -124,6 +124,7 @@ nnoremap <C-g> :Rg<Cr>
 
 " turn syntax highlighting on
 set t_Co=256
+set background=dark
 colorscheme ir_black
 
 " set UTF-8 encoding
@@ -303,7 +304,6 @@ let g:load_doxygen_syntax=1
 set so=10
 
 set ruler
-set background=dark
 
 " intelligent comments
 set comments=sl:/*,mb:\ *,elx:\ */

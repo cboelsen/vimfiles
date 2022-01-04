@@ -218,3 +218,11 @@ highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Re
 highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+
+" For YouCompleteMe
+highlight YcmErrorSign      guifg=red       guibg=NONE      gui=NONE      ctermfg=red       ctermbg=NONE     cterm=NONE
+highlight YcmWarningSign    guifg=yellow    guibg=NONE      gui=NONE      ctermfg=yellow    ctermbg=NONE     cterm=NONE
+highlight YcmErrorLine      guifg=NONE      guibg=#5f0000   gui=NONE      ctermfg=NONE      ctermbg=52       cterm=NONE
+highlight YcmWarningLine    guifg=NONE      guibg=#303030   gui=NONE      ctermfg=NONE      ctermbg=236      cterm=NONE
+highlight YcmErrorSection   guifg=NONE      guibg=#5f0000   gui=NONE      ctermfg=NONE      ctermbg=52       cterm=NONE
+highlight YcmWarningSection guifg=NONE      guibg=#303030   gui=NONE      ctermfg=NONE      ctermbg=236      cterm=NONE
